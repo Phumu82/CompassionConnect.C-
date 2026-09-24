@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "CompassionConnect.Web": {
+    "GiftOfTheGivers.Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
@@ -10,3 +10,4 @@
     }
   }
 }
+

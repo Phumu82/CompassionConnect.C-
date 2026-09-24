@@ -1,4 +1,4 @@
-// Compassion Connect - site-wide behaviour
+﻿// Gift of the Givers - site-wide behaviour
 (function () {
     "use strict";
 
@@ -33,3 +33,4 @@
         });
     });
 })();
+

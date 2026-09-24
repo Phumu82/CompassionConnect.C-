@@ -1,5 +1,5 @@
-/* ==========================================================================
-   Gift of the Givers Foundation — Compassion Connect
+﻿/* ==========================================================================
+   Gift of the Givers Foundation â€” Compassion Connect
    Design system ported from the original React/Tailwind app.
    Brand: Primary Blue #0057B8, Green #2E8B57, Orange #F57C00.
    ========================================================================== */
@@ -366,3 +366,4 @@ a {
 @media (max-width: 991.98px) {
   .gg-hero h1 { font-size: 2.2rem; }
 }
+
