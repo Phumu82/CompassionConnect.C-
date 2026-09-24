@@ -1,0 +1,38 @@
+@model IReadOnlyList<Donation>
+@{
+    ViewData["Title"] = "Donation History";
+}
+<section class="py-5">
+    <div class="container-fluid px-4">
+        <div class="row">
+            <div class="col-lg-3"><partial name="_DonorSidebar" /></div>
+            <div class="col-lg-9">
+                <h2 class="mb-4">Donation History</h2>
+                <div class="card p-4">
+                    <div class="table-responsive">
+                        <table class="table table-gg align-middle">
+                            <thead><tr><th>Reference</th><th>Project</th><th>Amount</th><th>Type</th><th>Status</th><th>Date</th></tr></thead>
+                            <tbody>
+                                @foreach (var donation in Model)
+                                {
+                                    <tr>
+                                        <td class="small">@donation.ReferenceNumber</td>
+                                        <td class="small">@(donation.Project?.Title ?? "General Fund")</td>
+                                        <td class="small fw-semibold">R@(donation.Amount.ToString("N2"))</td>
+                                        <td class="small">@donation.Type</td>
+                                        <td><span class="status-pill @donation.Status.ToString().ToLower()">@donation.Status</span></td>
+                                        <td class="small">@donation.DonationDate.ToString("dd MMM yyyy")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (!Model.Any())
+                    {
+                        <div class="alert alert-info mb-0">You haven't made any donations yet.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

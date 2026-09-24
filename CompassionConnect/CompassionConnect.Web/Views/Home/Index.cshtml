@@ -1,0 +1,157 @@
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="gg-hero py-5 py-lg-6">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <span class="badge badge-emergency mb-3 px-3 py-2"><i class="bi bi-broadcast me-1"></i> Active Emergency Response</span>
+                <h1 class="display-5 fw-bold mb-3">Rapid disaster relief, powered by South Africans who care.</h1>
+                <p class="lead" style="max-width: 34rem; color: rgba(255,255,255,0.88);">
+                    Since 1992, Gift of the Givers has delivered emergency aid, medical care and long-term recovery
+                    support to communities across South Africa and beyond. Every donation is tracked from your pocket
+                    to the point of need.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a class="btn btn-emergency btn-lg" asp-controller="Donation" asp-action="Index"><i class="bi bi-heart-fill me-2"></i>Donate Now</a>
+                    <a class="btn btn-lg btn-outline-light" asp-controller="Volunteer" asp-action="Index"><i class="bi bi-people-fill me-2"></i>Become a Volunteer</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="gg-hero-stat text-center">
+                            <div class="fs-3 fw-bold">R@(Model.TotalRaised.ToString("N0"))</div>
+                            <div class="small">Raised to date</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="gg-hero-stat text-center">
+                            <div class="fs-3 fw-bold">@Model.PeopleAssisted.ToString("N0")</div>
+                            <div class="small">People assisted</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="gg-hero-stat text-center">
+                            <div class="fs-3 fw-bold">@Model.ActiveProjects</div>
+                            <div class="small">Active projects</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="gg-hero-stat text-center">
+                            <div class="fs-3 fw-bold">@Model.ActiveVolunteers</div>
+                            <div class="small">Registered volunteers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="gg-eyebrow">Where the need is greatest</span>
+                <h2 class="mt-1 mb-0">Active Emergency Campaigns</h2>
+            </div>
+            <a asp-controller="Project" asp-action="Index" class="btn btn-outline-primary">View all projects <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var project in Model.EmergencyCampaigns)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-hover h-100">
+                        <div class="position-relative">
+                            <img src="@project.ImageUrl" class="card-img-top object-fit-cover" style="height: 200px;" alt="@project.Title" onerror="this.src='/images/campaigns/default-campaign.jpg'" />
+                            <span class="badge badge-emergency position-absolute top-0 start-0 m-3">Emergency</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge badge-soft-primary align-self-start mb-2">@project.Province</span>
+                            <h5 class="card-title">@project.Title</h5>
+                            <p class="card-text text-muted small flex-grow-1">@project.Summary</p>
+                            <div class="gg-progress mb-2"><div style="width: @(project.PercentFunded.ToString("0.##"))%"></div></div>
+                            <div class="d-flex justify-content-between small mb-3">
+                                <span class="fw-semibold">R@(project.RaisedAmount.ToString("N0")) raised</span>
+                                <span class="text-muted">of R@(project.GoalAmount.ToString("N0"))</span>
+                            </div>
+                            <a class="btn btn-primary w-100" asp-controller="Donation" asp-action="Index" asp-route-projectId="@project.ProjectId">Donate to this project</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!Model.EmergencyCampaigns.Any())
+            {
+                <div class="col-12">
+                    <div class="alert alert-info">There are no active emergency campaigns right now &mdash; thank you for checking in.</div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background-color: var(--gg-primary-soft);">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="gg-stat-value">R@(Model.TotalRaised.ToString("N0"))</div>
+                <div class="text-muted small text-uppercase fw-semibold">Total Raised</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="gg-stat-value">@Model.PeopleAssisted.ToString("N0")</div>
+                <div class="text-muted small text-uppercase fw-semibold">People Assisted</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="gg-stat-value">@Model.ActiveProjects</div>
+                <div class="text-muted small text-uppercase fw-semibold">Active Projects</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="gg-stat-value">@Model.ActiveVolunteers</div>
+                <div class="text-muted small text-uppercase fw-semibold">Volunteers</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="gg-eyebrow">From the field</span>
+                <h2 class="mt-1 mb-0">Latest News</h2>
+            </div>
+            <a asp-controller="News" asp-action="Index" class="btn btn-outline-primary">All news <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+        <div class="row g-4">
+            @foreach (var article in Model.LatestNews)
+            {
+                <div class="col-md-4">
+                    <div class="card card-hover h-100">
+                        <img src="@article.ImageUrl" class="card-img-top object-fit-cover" style="height: 170px;" alt="@article.ImageAlt" onerror="this.src='/images/news/default-news.jpg'" />
+                        <div class="card-body">
+                            <span class="badge badge-soft-primary mb-2">@article.Category.ToDisplayName()</span>
+                            <h5 class="card-title"><a asp-controller="News" asp-action="Details" asp-route-slug="@article.Slug" class="text-dark stretched-link text-decoration-none">@article.Title</a></h5>
+                            <p class="card-text text-muted small">@article.Excerpt</p>
+                            <span class="small text-muted"><i class="bi bi-clock me-1"></i>@article.ReadMinutes min read</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background: var(--gg-gradient-hero); color: #fff;">
+    <div class="container text-center py-4">
+        <h2 class="text-white">Ready to make a difference?</h2>
+        <p class="lead mb-4" style="color: rgba(255,255,255,0.85);">Every rand and every hour is tracked, reported, and put to work where it's needed most.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a class="btn btn-emergency btn-lg" asp-controller="Donation" asp-action="Index">Donate Now</a>
+            <a class="btn btn-lg btn-outline-light" asp-controller="Volunteer" asp-action="Index">Volunteer With Us</a>
+        </div>
+    </div>
+</section>

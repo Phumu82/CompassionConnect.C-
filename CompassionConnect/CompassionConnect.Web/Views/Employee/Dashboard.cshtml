@@ -1,0 +1,118 @@
+@model EmployeeDashboardViewModel
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<section class="py-5">
+    <div class="container-fluid px-4">
+        <div class="row">
+            <div class="col-lg-3">
+                <partial name="_EmployeeSidebar" />
+            </div>
+            <div class="col-lg-9">
+                <h2 class="mb-1">Welcome back</h2>
+                <p class="text-muted mb-4">Here's what's happening across all relief operations today.</p>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-xl-3">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Total Raised</div>
+                            <div class="fs-4 fw-bold">R@(Model.TotalRaised.ToString("N0"))</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Total Donations</div>
+                            <div class="fs-4 fw-bold">@Model.TotalDonations</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Active Volunteers</div>
+                            <div class="fs-4 fw-bold">@Model.ActiveVolunteers</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Active Projects</div>
+                            <div class="fs-4 fw-bold">@Model.ActiveProjects</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card p-4 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Recent Donations</h5>
+                                <a asp-controller="Employee" asp-action="Donations" class="small">View all</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-gg align-middle">
+                                    <thead><tr><th>Reference</th><th>Donor</th><th>Amount</th></tr></thead>
+                                    <tbody>
+                                        @foreach (var donation in Model.RecentDonations)
+                                        {
+                                            <tr>
+                                                <td class="small">@donation.ReferenceNumber</td>
+                                                <td class="small">@(donation.IsAnonymous ? "Anonymous" : donation.Donor?.FullName)</td>
+                                                <td class="small fw-semibold">R@(donation.Amount.ToString("N0"))</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card p-4 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Recent Volunteer Applications</h5>
+                                <a asp-controller="Employee" asp-action="Volunteers" class="small">View all</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-gg align-middle">
+                                    <thead><tr><th>Name</th><th>Province</th><th>Status</th></tr></thead>
+                                    <tbody>
+                                        @foreach (var volunteer in Model.RecentVolunteers)
+                                        {
+                                            <tr>
+                                                <td class="small">@volunteer.FullName</td>
+                                                <td class="small">@volunteer.Province</td>
+                                                <td><span class="status-pill @volunteer.Status.ToString().ToLower()">@volunteer.Status</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-4 mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">All Projects</h5>
+                        <a asp-controller="Project" asp-action="Create" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg me-1"></i>New project</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-gg align-middle">
+                            <thead><tr><th>Title</th><th>Province</th><th>Status</th><th>Funded</th><th></th></tr></thead>
+                            <tbody>
+                                @foreach (var project in Model.Projects)
+                                {
+                                    <tr>
+                                        <td class="small">@project.Title</td>
+                                        <td class="small">@project.Province</td>
+                                        <td><span class="status-pill @project.Status.ToString().ToLower()">@project.Status</span></td>
+                                        <td class="small">@project.PercentFunded.ToString("0")%</td>
+                                        <td><a asp-controller="Project" asp-action="Edit" asp-route-id="@project.ProjectId" class="btn btn-sm btn-outline-primary">Edit</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

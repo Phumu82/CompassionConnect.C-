@@ -1,0 +1,59 @@
+@model DonorDashboardViewModel
+@{
+    ViewData["Title"] = "My Dashboard";
+}
+<section class="py-5">
+    <div class="container-fluid px-4">
+        <div class="row">
+            <div class="col-lg-3"><partial name="_DonorSidebar" /></div>
+            <div class="col-lg-9">
+                <h2 class="mb-1">Welcome back, @Model.Donor?.FullName</h2>
+                <p class="text-muted mb-4">Thank you for your continued generosity.</p>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-md-4">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Total Donated</div>
+                            <div class="fs-4 fw-bold">R@(Model.TotalDonated.ToString("N0"))</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Donations Made</div>
+                            <div class="fs-4 fw-bold">@Model.Donations.Count</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="gg-kpi-card">
+                            <div class="text-muted small">Tax Certificates</div>
+                            <div class="fs-4 fw-bold">@Model.CertificatesIssued</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Recent Donations</h5>
+                        <a asp-controller="Donation" asp-action="Index" class="btn btn-sm btn-primary">Donate again</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-gg align-middle">
+                            <thead><tr><th>Reference</th><th>Project</th><th>Amount</th><th>Date</th></tr></thead>
+                            <tbody>
+                                @foreach (var donation in Model.Donations.Take(5))
+                                {
+                                    <tr>
+                                        <td class="small">@donation.ReferenceNumber</td>
+                                        <td class="small">@(donation.Project?.Title ?? "General Fund")</td>
+                                        <td class="small fw-semibold">R@(donation.Amount.ToString("N2"))</td>
+                                        <td class="small">@donation.DonationDate.ToString("dd MMM yyyy")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

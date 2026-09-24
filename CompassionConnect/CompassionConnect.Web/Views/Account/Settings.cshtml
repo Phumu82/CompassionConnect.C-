@@ -1,0 +1,37 @@
+@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = "Account Settings";
+}
+
+<section class="py-5">
+    <div class="container" style="max-width: 560px;">
+        <h2 class="mb-1">Account Settings</h2>
+        <p class="text-muted mb-4">Update your password to keep your account secure.</p>
+
+        <div class="card p-4">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            <form asp-controller="Account" asp-action="Settings" method="post">
+                <div class="mb-3">
+                    <label asp-for="CurrentPassword" class="form-label"></label>
+                    <input asp-for="CurrentPassword" class="form-control" />
+                    <span asp-validation-for="CurrentPassword" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NewPassword" class="form-label"></label>
+                    <input asp-for="NewPassword" class="form-control" />
+                    <span asp-validation-for="NewPassword" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Update password</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

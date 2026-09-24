@@ -1,0 +1,105 @@
+@{
+    ViewData["Title"] = "About Us";
+}
+
+<section class="gg-hero py-5">
+    <div class="container py-3 text-center">
+        <span class="gg-eyebrow text-white-50">Our story</span>
+        <h1 class="mt-2">Three decades of showing up when it matters most</h1>
+        <p class="lead mx-auto" style="max-width: 42rem; color: rgba(255,255,255,0.85);">
+            Founded in 1992, the Gift of the Givers Foundation is Africa's largest disaster response
+            organisation of its kind, reaching millions of people across more than 45 countries.
+        </p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <span class="gg-eyebrow">Our mission</span>
+                <h2 class="mt-1">Restoring dignity in the darkest moments</h2>
+                <p class="text-muted">
+                    We believe disaster response should be immediate, dignified and locally led. Our teams
+                    work alongside communities &mdash; not just for them &mdash; delivering food, water, shelter,
+                    medical care and long-term rebuilding support wherever the need is greatest.
+                </p>
+                <p class="text-muted">
+                    From flood-hit villages in KwaZulu-Natal to drought-stricken farms in the Karoo, our
+                    volunteer and staff network can mobilise a first response convoy within twelve hours of
+                    a verified emergency, anywhere in South Africa.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="gg-kpi-card text-center">
+                            <div class="gg-stat-value">33+</div>
+                            <div class="text-muted small">Years of service</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="gg-kpi-card text-center">
+                            <div class="gg-stat-value">45+</div>
+                            <div class="text-muted small">Countries reached</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="gg-kpi-card text-center">
+                            <div class="gg-stat-value">92.4%</div>
+                            <div class="text-muted small">Direct to programmes</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="gg-kpi-card text-center">
+                            <div class="gg-stat-value">24/7</div>
+                            <div class="text-muted small">Emergency hotline</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background-color: var(--gg-primary-soft);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="gg-eyebrow">What guides us</span>
+            <h2 class="mt-1">Our values</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 text-center p-4">
+                    <i class="bi bi-lightning-charge-fill fs-1 text-brand mb-3"></i>
+                    <h5>Speed</h5>
+                    <p class="text-muted small">We aim to be first on the ground, because every hour counts in an emergency.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 text-center p-4">
+                    <i class="bi bi-shield-check fs-1 text-success-strong mb-3"></i>
+                    <h5>Transparency</h5>
+                    <p class="text-muted small">Every donation is tracked with a unique reference from receipt to delivery.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 text-center p-4">
+                    <i class="bi bi-people-fill fs-1 mb-3" style="color: var(--gg-primary);"></i>
+                    <h5>Dignity</h5>
+                    <p class="text-muted small">We serve every community with respect, regardless of faith, race or background.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 text-center">
+    <div class="container">
+        <h2>Join thousands of South Africans making a difference</h2>
+        <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+            <a class="btn btn-emergency btn-lg" asp-controller="Donation" asp-action="Index">Donate Now</a>
+            <a class="btn btn-lg btn-outline-primary" asp-controller="Volunteer" asp-action="Index">Volunteer With Us</a>
+        </div>
+    </div>
+</section>

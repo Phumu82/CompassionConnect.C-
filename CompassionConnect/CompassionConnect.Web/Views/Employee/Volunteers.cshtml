@@ -1,0 +1,45 @@
+@model IReadOnlyList<Volunteer>
+@{
+    ViewData["Title"] = "Volunteers";
+}
+<section class="py-5">
+    <div class="container-fluid px-4">
+        <div class="row">
+            <div class="col-lg-3"><partial name="_EmployeeSidebar" /></div>
+            <div class="col-lg-9">
+                <h2 class="mb-4">Volunteer Applications</h2>
+                <div class="card p-4">
+                    <div class="table-responsive">
+                        <table class="table table-gg align-middle">
+                            <thead><tr><th>Name</th><th>Contact</th><th>Province</th><th>Skills</th><th>Status</th><th>Update</th></tr></thead>
+                            <tbody>
+                                @foreach (var volunteer in Model)
+                                {
+                                    <tr>
+                                        <td class="small">@volunteer.FullName</td>
+                                        <td class="small">@volunteer.Email<br /><span class="text-muted">@volunteer.PhoneNumber</span></td>
+                                        <td class="small">@volunteer.Province</td>
+                                        <td class="small">@string.Join(", ", volunteer.SkillList)</td>
+                                        <td><span class="status-pill @volunteer.Status.ToString().ToLower()">@volunteer.Status</span></td>
+                                        <td>
+                                            <form asp-controller="Employee" asp-action="UpdateVolunteerStatus" method="post" class="d-flex gap-1">
+                                                <input type="hidden" name="volunteerId" value="@volunteer.VolunteerId" />
+                                                <select name="status" class="form-select form-select-sm">
+                                                    @foreach (var status in Enum.GetValues<VolunteerStatus>())
+                                                    {
+                                                        <option value="@status" selected="@(volunteer.Status == status)">@status</option>
+                                                    }
+                                                </select>
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

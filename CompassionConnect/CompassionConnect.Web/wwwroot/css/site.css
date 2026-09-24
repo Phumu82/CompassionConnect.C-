@@ -1,0 +1,368 @@
+/* ==========================================================================
+   Gift of the Givers Foundation — Compassion Connect
+   Design system ported from the original React/Tailwind app.
+   Brand: Primary Blue #0057B8, Green #2E8B57, Orange #F57C00.
+   ========================================================================== */
+
+:root {
+  --gg-primary: #0057B8;
+  --gg-primary-dark: #003D82;
+  --gg-primary-soft: #E8F1FC;
+  --gg-success: #2E8B57;
+  --gg-success-dark: #226B42;
+  --gg-brand: #F57C00;
+  --gg-brand-dark: #C86400;
+  --gg-warning: #E0A800;
+  --gg-danger: #C0392B;
+  --gg-foreground: #1C2434;
+  --gg-muted: #5A6478;
+  --gg-border: #E2E6EE;
+  --gg-bg: #F9FAFC;
+  --gg-sidebar: #1B2A4A;
+  --gg-sidebar-accent: #26375C;
+  --gg-radius: 0.875rem;
+  --gg-shadow-soft: 0 1px 2px rgba(28, 36, 52, 0.06), 0 8px 24px -12px rgba(28, 36, 52, 0.18);
+  --gg-shadow-lift: 0 2px 6px rgba(28, 36, 52, 0.08), 0 24px 48px -24px rgba(28, 36, 52, 0.35);
+  --gg-gradient-hero: linear-gradient(135deg, #12336B 0%, #0057B8 55%, #1E7FBF 100%);
+  --gg-gradient-accent: linear-gradient(120deg, #F57C00, #F5A623);
+  --gg-gradient-success: linear-gradient(120deg, #2E8B57, #3FAE73);
+
+  --bs-primary: var(--gg-primary);
+  --bs-primary-rgb: 0, 87, 184;
+  --bs-success: var(--gg-success);
+  --bs-success-rgb: 46, 139, 87;
+  --bs-warning: var(--gg-brand);
+  --bs-warning-rgb: 245, 124, 0;
+  --bs-body-color: var(--gg-foreground);
+  --bs-body-bg: var(--gg-bg);
+  --bs-border-color: var(--gg-border);
+  --bs-link-color: var(--gg-primary);
+  --bs-link-hover-color: var(--gg-primary-dark);
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--gg-foreground);
+  background-color: var(--gg-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  border-radius: 0.6rem;
+  font-weight: 600;
+  padding-inline: 1.15rem;
+}
+
+.btn-primary {
+  background-color: var(--gg-primary);
+  border-color: var(--gg-primary);
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--gg-primary-dark);
+  border-color: var(--gg-primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--gg-primary);
+  border-color: var(--gg-primary);
+}
+.btn-outline-primary:hover {
+  background-color: var(--gg-primary);
+  border-color: var(--gg-primary);
+}
+
+.btn-emergency {
+  background: var(--gg-gradient-accent);
+  border: none;
+  color: #fff;
+  box-shadow: var(--gg-shadow-soft);
+}
+.btn-emergency:hover {
+  filter: brightness(0.95);
+  color: #fff;
+}
+
+.btn-success {
+  background-color: var(--gg-success);
+  border-color: var(--gg-success);
+}
+
+.card {
+  border: 1px solid var(--gg-border);
+  border-radius: 1rem;
+  box-shadow: var(--gg-shadow-soft);
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--gg-shadow-lift);
+}
+
+.badge-soft-primary {
+  background-color: var(--gg-primary-soft);
+  color: var(--gg-primary);
+  font-weight: 600;
+}
+
+.badge-emergency {
+  background: var(--gg-gradient-accent);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.text-brand { color: var(--gg-brand) !important; }
+.text-success-strong { color: var(--gg-success) !important; }
+.bg-primary-soft { background-color: var(--gg-primary-soft) !important; }
+
+/* ---------------------------------------------------------------- Header */
+.gg-topbar {
+  background-color: var(--gg-primary);
+  color: rgba(255,255,255,0.92);
+  font-size: 0.78rem;
+}
+
+.gg-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background-color: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gg-border);
+}
+
+.gg-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--gg-foreground);
+}
+.gg-logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.65rem;
+  background: var(--gg-gradient-hero);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.gg-nav .nav-link {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gg-muted);
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.8rem;
+}
+.gg-nav .nav-link:hover {
+  background-color: var(--gg-primary-soft);
+  color: var(--gg-primary);
+}
+.gg-nav .nav-link.active {
+  background-color: var(--gg-primary-soft);
+  color: var(--gg-primary);
+}
+
+/* ----------------------------------------------------------------- Hero */
+.gg-hero {
+  position: relative;
+  background: var(--gg-gradient-hero);
+  color: #fff;
+  overflow: hidden;
+}
+.gg-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 10%, rgba(255,255,255,0.12), transparent 55%);
+  pointer-events: none;
+}
+.gg-hero .container {
+  position: relative;
+  z-index: 1;
+}
+.gg-hero-stat {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1rem;
+  backdrop-filter: blur(6px);
+  padding: 1rem;
+}
+
+/* ---------------------------------------------------------------- Stats */
+.gg-stat-value {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--gg-primary);
+}
+
+/* -------------------------------------------------------------- Footer */
+.gg-footer {
+  margin-top: auto;
+  background-color: var(--gg-sidebar);
+  color: rgba(255,255,255,0.82);
+}
+.gg-footer h6 {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.gg-footer a {
+  color: rgba(255,255,255,0.82);
+}
+.gg-footer a:hover {
+  color: #fff;
+}
+.gg-footer .form-control {
+  background-color: var(--gg-sidebar-accent);
+  border-color: rgba(255,255,255,0.15);
+  color: #fff;
+}
+.gg-footer .social-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 0.6rem;
+  background-color: var(--gg-sidebar-accent);
+  color: #fff;
+}
+.gg-footer .social-icon:hover {
+  background-color: var(--gg-primary);
+}
+
+/* ------------------------------------------------------------ Progress */
+.gg-progress {
+  height: 10px;
+  border-radius: 999px;
+  background-color: var(--gg-border);
+  overflow: hidden;
+}
+.gg-progress > div {
+  height: 100%;
+  background: var(--gg-gradient-success);
+}
+
+/* -------------------------------------------------------- Section head */
+.gg-eyebrow {
+  color: var(--gg-primary);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------ Dashboard */
+.gg-sidebar-nav {
+  background-color: var(--gg-sidebar);
+  min-height: 100%;
+  color: rgba(255,255,255,0.85);
+}
+.gg-sidebar-nav .nav-link {
+  color: rgba(255,255,255,0.72);
+  border-radius: 0.6rem;
+  font-weight: 600;
+  padding: 0.65rem 0.9rem;
+}
+.gg-sidebar-nav .nav-link.active,
+.gg-sidebar-nav .nav-link:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.gg-kpi-card {
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid var(--gg-border);
+  box-shadow: var(--gg-shadow-soft);
+}
+
+.table-gg thead th {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--gg-muted);
+  border-bottom-width: 1px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+.status-pill.completed, .status-pill.approved, .status-pill.placed, .status-pill.active {
+  background-color: rgba(46, 139, 87, 0.12);
+  color: var(--gg-success-dark);
+}
+.status-pill.pending, .status-pill.planned {
+  background-color: rgba(224, 168, 0, 0.15);
+  color: #8a6600;
+}
+.status-pill.refunded, .status-pill.declined, .status-pill.onhold {
+  background-color: rgba(192, 57, 43, 0.12);
+  color: var(--gg-danger);
+}
+.status-pill.completed-project {
+  background-color: rgba(0, 87, 184, 0.12);
+  color: var(--gg-primary);
+}
+
+/* -------------------------------------------------------------- Misc */
+.gg-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background-color: var(--gg-primary-soft);
+  color: var(--gg-primary);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.object-fit-cover { object-fit: cover; }
+
+.gg-auth-card {
+  max-width: 460px;
+  margin: 3rem auto;
+}
+
+@media (max-width: 991.98px) {
+  .gg-hero h1 { font-size: 2.2rem; }
+}
