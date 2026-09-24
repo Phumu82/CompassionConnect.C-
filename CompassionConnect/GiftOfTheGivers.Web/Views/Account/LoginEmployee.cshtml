@@ -1,0 +1,50 @@
+﻿@model EmployeeLoginViewModel
+@{
+    ViewData["Title"] = "Employee Login";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="card gg-auth-card p-4 p-md-5">
+            <div class="text-center mb-4">
+                <span class="gg-logo-mark d-inline-flex mb-3">GG</span>
+                <h3>Employee Login</h3>
+                <p class="text-muted small">Staff access to manage projects, donations and volunteers.</p>
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <form asp-controller="Account" asp-action="LoginEmployee" method="post">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="employee@giftofthegivers.org" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+                <div class="form-check mb-3">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    <label asp-for="RememberMe" class="form-check-label small"></label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Sign in</button>
+            </form>
+
+            <p class="text-center small text-muted mt-4 mb-0">
+                Not a staff member? <a asp-controller="Account" asp-action="LoginDonor">Donor login</a>
+            </p>
+            <div class="alert alert-info small mt-4 mb-0">
+                Demo account: <strong>employee@giftofthegivers.org</strong> / <strong>Employee@2026!</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

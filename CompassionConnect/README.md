@@ -1,4 +1,4 @@
-# Compassion Connect — ASP.NET Core MVC (.NET 8)
+﻿# Gift of the Givers â€” ASP.NET Core MVC (.NET 8)
 
 Gift of the Givers Foundation Disaster Relief Management System, converted from the
 original React + TypeScript + Vite application into a production-shaped ASP.NET Core
@@ -7,8 +7,8 @@ MVC (.NET 8) solution using C#, Entity Framework Core, SQL Server and ASP.NET Id
 ## Solution layout
 
 ```
-CompassionConnect.sln
-CompassionConnect.Web/
+GiftOfTheGivers.sln
+GiftOfTheGivers.Web/
   Controllers/        Home, Account, Donation, Volunteer, Project, Employee, News, Donor
   Models/              Employee, Donor, ApplicationUser, ReliefProject, Donation,
                         TaxCertificate, Volunteer, NewsArticle
@@ -24,16 +24,16 @@ CompassionConnect.Web/
 
 ## Architecture
 
-- **Repository pattern** — a generic `Repository<T>` handles common CRUD; entity-specific
+- **Repository pattern** â€” a generic `Repository<T>` handles common CRUD; entity-specific
   repositories (`DonationRepository`, `VolunteerRepository`, `ProjectRepository`, etc.)
   add targeted queries. All repositories are coordinated through a single `UnitOfWork`
   so each request commits one `SaveChanges` transaction.
-- **Service layer** — business rules (resolving/creating a donor, generating unique
+- **Service layer** â€” business rules (resolving/creating a donor, generating unique
   reference numbers, issuing tax certificates, updating project totals) live in
   `Services/*Service.cs`, injected into controllers via interfaces.
-- **Dependency Injection** — everything (`DbContext`, Identity, repositories, services)
+- **Dependency Injection** â€” everything (`DbContext`, Identity, repositories, services)
   is registered in `Program.cs`.
-- **ViewModels** — controllers never pass EF entities directly into forms; `ViewModels/`
+- **ViewModels** â€” controllers never pass EF entities directly into forms; `ViewModels/`
   hold validation attributes and shape data for each view.
 
 ## Authentication & roles
@@ -43,7 +43,7 @@ ASP.NET Identity is configured with two roles: **Employee** and **Donor**.
 - `AccountController` exposes separate `LoginDonor` / `LoginEmployee` actions (matching
   the original app's distinct donor vs staff sign-in), plus `Register`, `Profile`,
   `Settings` (change password) and `ForgotPassword`.
-- **Anonymous donations are fully supported** — `DonationController.Index` works with or
+- **Anonymous donations are fully supported** â€” `DonationController.Index` works with or
   without an authenticated user; a guest donor record is created automatically from the
   form's name/email so a tax certificate can still be issued.
 - Demo accounts are seeded automatically on first run (see below).
@@ -84,24 +84,24 @@ donor dashboard and downloaded as a printable PDF (generated server-side with
 
 ## Running the project (Visual Studio 2022)
 
-1. Open `CompassionConnect.sln` in Visual Studio 2022 (17.8+) with the **ASP.NET and web
+1. Open `GiftOfTheGivers.sln` in Visual Studio 2022 (17.8+) with the **ASP.NET and web
    development** workload installed.
 2. Restore NuGet packages (VS does this automatically on open, or `dotnet restore`).
 3. Update the `DefaultConnection` string in `appsettings.json` if you're not using
    LocalDB.
 4. In **Package Manager Console**, run:
    ```
-   Add-Migration InitialCreate -Project CompassionConnect.Web
-   Update-Database -Project CompassionConnect.Web
+   Add-Migration InitialCreate -Project GiftOfTheGivers.Web
+   Update-Database -Project GiftOfTheGivers.Web
    ```
    (Or from the CLI: `dotnet ef migrations add InitialCreate` then `dotnet ef database update`,
-   run from the `CompassionConnect.Web` folder.)
+   run from the `GiftOfTheGivers.Web` folder.)
 5. Press **F5** / Start. The app seeds the database automatically on first launch.
 
 ## Azure deployment notes
 
 - The connection string and app settings are already externalised in
-  `appsettings.json` / `appsettings.Development.json` — replace with an Azure SQL
+  `appsettings.json` / `appsettings.Development.json` â€” replace with an Azure SQL
   connection string (and ideally move secrets to Azure App Service Configuration or
   Key Vault) for production.
 - `sql.EnableRetryOnFailure()` is enabled on the `DbContext` for Azure SQL transient
@@ -118,3 +118,4 @@ fix any residual compiler errors before deploying. Likely areas to double check:
 - EF Core migration generation (enum-as-string conversions, decimal precision).
 - Minor Razor syntax edge cases in conditional `class`/`selected` attributes.
 - QuestPDF Community license activation (already set in `TaxCertificateService`).
+
